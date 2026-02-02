@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useReducer, useCallback, ReactNode } from 'react';
 import { entryReducer, initialState, EntryState } from './entryReducer';
 import { api } from '@/services/api';

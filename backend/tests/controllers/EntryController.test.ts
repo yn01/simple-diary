@@ -23,6 +23,7 @@ describe('EntryController', () => {
   };
 
   beforeEach(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockService = new EntryService(null as any) as jest.Mocked<EntryService>;
     controller = new EntryController(mockService);
 

@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3';
 import { EntryRepository } from '../../src/repositories/EntryRepository';
-import { Entry, CreateEntryRequest, UpdateEntryRequest } from '../../src/models/Entry';
+import { CreateEntryRequest } from '../../src/models/Entry';
 
 describe('EntryRepository', () => {
   let db: Database.Database;

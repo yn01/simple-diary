@@ -278,6 +278,28 @@ npm run lint
 - ⚡ 適切なHTTPステータスコード
 - ⚡ ローカルSQLiteで高速動作
 
+## デプロイ
+
+### Dockerでのデプロイ
+
+```bash
+# ビルド＆起動
+docker-compose up -d
+
+# ログ確認
+docker-compose logs -f
+
+# 停止
+docker-compose down
+```
+
+### その他のデプロイ方法
+
+- Render.com（推奨）
+- VPS (DigitalOcean, Linode等)
+
+詳細は [DEPLOYMENT.md](doc/DEPLOYMENT.md) を参照してください。
+
 ## 貢献
 
 1. Fork the repository
@@ -303,6 +325,7 @@ MIT License - 詳細は [LICENSE](LICENSE) を参照してください。
 - [API仕様書](doc/API.md)
 - [ユーザーマニュアル](doc/USER_MANUAL.md)
 - [開発者ドキュメント](doc/DEVELOPMENT.md)
+- [デプロイガイド](doc/DEPLOYMENT.md)
 
 ---
 

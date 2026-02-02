@@ -203,8 +203,14 @@ Q2: "データベースはどれを使用しますか？"
   - コード品質チェックワークフロー作成（Format/TypeScript）
   - Dependabot 自動依存関係更新設定
   - READMEにCIバッジ追加
-- [ ] 本番デプロイ
-- [ ] リリースノート作成
+- [x] デプロイ準備
+  - デプロイガイド作成（doc/DEPLOYMENT.md）
+  - Dockerデプロイ設定（Dockerfile, docker-compose.yml）
+  - Render.com デプロイ手順書
+  - VPS デプロイ手順書
+  - READMEにデプロイセクション追加
+- [ ] 本番デプロイ実行（オプション）
+- [ ] リリースノート作成（オプション）
 
 ---
 
@@ -313,3 +319,6 @@ Q2: "データベースはどれを使用しますか？"
 - 2026-02-01: Codexレビュー実施（7件指摘）、全修正完了、Phase 4テスト完了
 - 2026-02-01: Phase 5ドキュメント作成完了（README.md, API.md, USER_MANUAL.md, DEVELOPMENT.md）
 - 2026-02-02: Phase 6デプロイ開始、GitHubリポジトリ作成・プッシュ完了（https://github.com/yn01/simple-diary）
+- 2026-02-02: CI/CD設定完了（GitHub Actions CI/Code Quality、Dependabot）
+- 2026-02-02: デプロイ準備完了（DEPLOYMENT.md、Docker設定、Render.com/VPS手順書）
+- 2026-02-02: Phase 5ドキュメントレビュー実施（Codex、6件指摘：UI言語不一致、API仕様書誤記等）

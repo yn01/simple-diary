@@ -7,8 +7,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.2-61DAFB.svg)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
-[![Test Coverage](https://img.shields.io/badge/coverage-99.4%25-brightgreen.svg)](https://github.com)
-[![Tests](https://img.shields.io/badge/tests-269%20passing-success.svg)](https://github.com)
+[![Test Coverage](https://img.shields.io/badge/coverage-99.4%25%20(as%20of%202026--02--02)-brightgreen.svg)](https://github.com)
+[![Tests](https://img.shields.io/badge/tests-269%20passing%20(as%20of%202026--02--02)-success.svg)](https://github.com)
 
 ## 概要
 
@@ -261,6 +261,7 @@ npm run lint
 
 | Method | Endpoint | 説明 |
 |--------|----------|------|
+| GET | /health | ヘルスチェック |
 | POST | /api/entries | エントリー作成 |
 | GET | /api/entries | エントリー一覧取得 |
 | GET | /api/entries/:id | エントリー詳細取得 |

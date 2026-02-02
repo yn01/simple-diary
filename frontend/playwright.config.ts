@@ -19,31 +19,39 @@ export default defineConfig({
     navigationTimeout: 30000,
   },
 
-  projects: [
-    // Desktop browsers
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-    // Tablet
-    {
-      name: 'tablet',
-      use: { ...devices['iPad (gen 7)'] },
-    },
-    // Mobile
-    {
-      name: 'mobile',
-      use: { ...devices['iPhone 13'] },
-    },
-  ],
+  projects: process.env.CI
+    ? [
+        // CI: Chromium only for faster execution
+        {
+          name: 'chromium',
+          use: { ...devices['Desktop Chrome'] },
+        },
+      ]
+    : [
+        // Local: All browsers and devices
+        {
+          name: 'chromium',
+          use: { ...devices['Desktop Chrome'] },
+        },
+        {
+          name: 'firefox',
+          use: { ...devices['Desktop Firefox'] },
+        },
+        {
+          name: 'webkit',
+          use: { ...devices['Desktop Safari'] },
+        },
+        // Tablet
+        {
+          name: 'tablet',
+          use: { ...devices['iPad (gen 7)'] },
+        },
+        // Mobile
+        {
+          name: 'mobile',
+          use: { ...devices['iPhone 13'] },
+        },
+      ],
 
   webServer: {
     command: 'npm run dev',

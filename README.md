@@ -219,6 +219,11 @@ npm run test:coverage       # カバレッジ付き
 npm run e2e                 # E2Eテスト
 ```
 
+**E2Eテスト実行の注意**:
+- E2Eテストはバックエンドサーバーが必要です
+- 事前に `cd backend && npm run dev` でバックエンドを起動してください
+- Playwrightが自動的にフロントエンドサーバーを起動します（`playwright.config.ts` の `webServer` 設定）
+
 ### テスト結果
 
 | カテゴリ | テスト数 | 成功率 | カバレッジ |

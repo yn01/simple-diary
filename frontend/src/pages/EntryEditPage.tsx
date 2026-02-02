@@ -7,7 +7,8 @@ import type { UpdateEntryRequest } from '@/types/Entry';
 export function EntryEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { currentEntry, isLoading, error, fetchEntry, updateEntry, clearCurrentEntry } = useEntries();
+  const { currentEntry, isLoading, error, fetchEntry, updateEntry, clearCurrentEntry } =
+    useEntries();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,17 +20,20 @@ export function EntryEditPage() {
     };
   }, [id, fetchEntry, clearCurrentEntry]);
 
-  const handleSubmit = useCallback(async (data: UpdateEntryRequest) => {
-    if (!id) return;
-    setSubmitError(null);
-    try {
-      await updateEntry(parseInt(id, 10), data);
-      navigate(`/entries/${id}`);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to update entry';
-      setSubmitError(message);
-    }
-  }, [id, updateEntry, navigate]);
+  const handleSubmit = useCallback(
+    async (data: UpdateEntryRequest) => {
+      if (!id) return;
+      setSubmitError(null);
+      try {
+        await updateEntry(parseInt(id, 10), data);
+        navigate(`/entries/${id}`);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Failed to update entry';
+        setSubmitError(message);
+      }
+    },
+    [id, updateEntry, navigate]
+  );
 
   const handleCancel = useCallback(() => {
     navigate(-1);
@@ -68,13 +72,8 @@ export function EntryEditPage() {
   if (error) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
-          {error}
-        </div>
-        <Link
-          to="/"
-          className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800"
-        >
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
+        <Link to="/" className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-1"

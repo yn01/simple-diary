@@ -3,11 +3,14 @@ import { z } from 'zod';
 import type { Entry, CreateEntryRequest, UpdateEntryRequest } from '@/types/Entry';
 
 const entrySchema = z.object({
-  date: z.string().min(1, 'Date is required').regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
-  content: z.string().min(1, 'Content is required').refine(
-    (val) => val.trim().length > 0,
-    { message: 'Content cannot be only whitespace' }
-  ),
+  date: z
+    .string()
+    .min(1, 'Date is required')
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
+  content: z
+    .string()
+    .min(1, 'Content is required')
+    .refine((val) => val.trim().length > 0, { message: 'Content cannot be only whitespace' }),
 });
 
 interface EntryFormProps {
@@ -74,9 +77,7 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           }`}
           disabled={isSubmitting}
         />
-        {errors.date && (
-          <p className="mt-1 text-sm text-red-600">{errors.date}</p>
-        )}
+        {errors.date && <p className="mt-1 text-sm text-red-600">{errors.date}</p>}
       </div>
 
       <div>
@@ -94,9 +95,7 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           placeholder="Write your diary entry..."
           disabled={isSubmitting}
         />
-        {errors.content && (
-          <p className="mt-1 text-sm text-red-600">{errors.content}</p>
-        )}
+        {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
       </div>
 
       <div className="flex gap-4">

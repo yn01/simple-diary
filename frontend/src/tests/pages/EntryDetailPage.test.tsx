@@ -75,7 +75,10 @@ describe('EntryDetailPage', () => {
 
     await waitFor(() => {
       expect(screen.getByRole('link', { name: /edit/i })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /edit/i })).toHaveAttribute('href', '/entries/1/edit');
+      expect(screen.getByRole('link', { name: /edit/i })).toHaveAttribute(
+        'href',
+        '/entries/1/edit'
+      );
     });
   });
 

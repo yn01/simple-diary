@@ -97,7 +97,11 @@ describe('API Service', () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 400,
-        json: () => Promise.resolve({ message: 'Validation Error', details: ["'content' must not be empty."] }),
+        json: () =>
+          Promise.resolve({
+            message: 'Validation Error',
+            details: ["'content' must not be empty."],
+          }),
       });
 
       await expect(api.createEntry(createRequest)).rejects.toThrow('Failed to create entry');

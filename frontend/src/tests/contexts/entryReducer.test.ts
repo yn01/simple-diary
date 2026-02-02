@@ -138,7 +138,7 @@ describe('entryReducer', () => {
       const stateWithCurrentEntry: EntryState = {
         ...initialState,
         entries: [mockEntry],
-        currentEntry: mockEntry
+        currentEntry: mockEntry,
       };
       const updatedEntry = { ...mockEntry, content: 'Updated content' };
       const action: EntryAction = { type: 'UPDATE_ENTRY', payload: updatedEntry };
@@ -172,7 +172,7 @@ describe('entryReducer', () => {
       const stateWithCurrentEntry: EntryState = {
         ...initialState,
         entries: [mockEntry],
-        currentEntry: mockEntry
+        currentEntry: mockEntry,
       };
       const action: EntryAction = { type: 'DELETE_ENTRY', payload: 1 };
       const newState = entryReducer(stateWithCurrentEntry, action);

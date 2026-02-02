@@ -98,7 +98,9 @@ describe('EntryForm', () => {
       await userEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/content is required|content cannot be only whitespace/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/content is required|content cannot be only whitespace/i)
+        ).toBeInTheDocument();
       });
       expect(onSubmit).not.toHaveBeenCalled();
     });
@@ -161,9 +163,7 @@ describe('EntryForm', () => {
 
   describe('Error Display', () => {
     it('shows submission error', () => {
-      renderWithRouter(
-        <EntryForm onSubmit={vi.fn()} submitError="Failed to save entry" />
-      );
+      renderWithRouter(<EntryForm onSubmit={vi.fn()} submitError="Failed to save entry" />);
 
       expect(screen.getByText('Failed to save entry')).toBeInTheDocument();
     });

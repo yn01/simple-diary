@@ -86,7 +86,10 @@ describe('EntryListPage', () => {
     renderWithProviders(<EntryListPage />);
 
     expect(screen.getByRole('link', { name: /new entry/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /new entry/i })).toHaveAttribute('href', '/entries/new');
+    expect(screen.getByRole('link', { name: /new entry/i })).toHaveAttribute(
+      'href',
+      '/entries/new'
+    );
   });
 
   it('renders search bar', async () => {

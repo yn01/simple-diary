@@ -43,11 +43,7 @@ describe('EntryController', () => {
       mockRequest.body = { date: '2026-01-31', content: 'Test content' };
       mockService.createEntry = jest.fn().mockReturnValue(mockEntry);
 
-      await controller.create(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.create(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.createEntry).toHaveBeenCalledWith({
         date: '2026-01-31',
@@ -64,11 +60,7 @@ describe('EntryController', () => {
         throw validationError;
       });
 
-      await controller.create(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.create(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(validationError);
     });
@@ -80,11 +72,7 @@ describe('EntryController', () => {
         throw error;
       });
 
-      await controller.create(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.create(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });
@@ -95,11 +83,7 @@ describe('EntryController', () => {
       const entries = [mockEntry, { ...mockEntry, id: 2 }];
       mockService.getAllEntries = jest.fn().mockReturnValue(entries);
 
-      await controller.getAll(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.getAllEntries).toHaveBeenCalled();
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -109,11 +93,7 @@ describe('EntryController', () => {
     it('returns empty array when no entries exist', async () => {
       mockService.getAllEntries = jest.fn().mockReturnValue([]);
 
-      await controller.getAll(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith([]);
@@ -125,11 +105,7 @@ describe('EntryController', () => {
         throw error;
       });
 
-      await controller.getAll(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });
@@ -140,11 +116,7 @@ describe('EntryController', () => {
       mockRequest.params = { id: '1' };
       mockService.getEntryById = jest.fn().mockReturnValue(mockEntry);
 
-      await controller.getById(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getById(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.getEntryById).toHaveBeenCalledWith(1);
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -155,11 +127,7 @@ describe('EntryController', () => {
       mockRequest.params = { id: '999' };
       mockService.getEntryById = jest.fn().mockReturnValue(null);
 
-      await controller.getById(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getById(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -170,11 +138,7 @@ describe('EntryController', () => {
     it('returns 400 for invalid id format', async () => {
       mockRequest.params = { id: 'invalid' };
 
-      await controller.getById(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getById(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -185,11 +149,7 @@ describe('EntryController', () => {
     it('returns 400 for negative id', async () => {
       mockRequest.params = { id: '-1' };
 
-      await controller.getById(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getById(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -204,11 +164,7 @@ describe('EntryController', () => {
         throw error;
       });
 
-      await controller.getById(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.getById(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });
@@ -221,11 +177,7 @@ describe('EntryController', () => {
       const updatedEntry = { ...mockEntry, content: 'Updated content' };
       mockService.updateEntry = jest.fn().mockReturnValue(updatedEntry);
 
-      await controller.update(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.update(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.updateEntry).toHaveBeenCalledWith(1, {
         date: '2026-01-31',
@@ -240,11 +192,7 @@ describe('EntryController', () => {
       mockRequest.body = { date: '2026-01-31', content: 'Updated content' };
       mockService.updateEntry = jest.fn().mockReturnValue(null);
 
-      await controller.update(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.update(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -256,11 +204,7 @@ describe('EntryController', () => {
       mockRequest.params = { id: 'invalid' };
       mockRequest.body = { date: '2026-01-31', content: 'Updated content' };
 
-      await controller.update(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.update(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -276,11 +220,7 @@ describe('EntryController', () => {
         throw validationError;
       });
 
-      await controller.update(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.update(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(validationError);
     });
@@ -292,11 +232,7 @@ describe('EntryController', () => {
       mockService.deleteEntry = jest.fn().mockReturnValue(true);
       mockResponse.send = jest.fn().mockReturnThis();
 
-      await controller.delete(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.delete(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.deleteEntry).toHaveBeenCalledWith(1);
       expect(mockResponse.status).toHaveBeenCalledWith(204);
@@ -307,11 +243,7 @@ describe('EntryController', () => {
       mockRequest.params = { id: '999' };
       mockService.deleteEntry = jest.fn().mockReturnValue(false);
 
-      await controller.delete(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.delete(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -322,11 +254,7 @@ describe('EntryController', () => {
     it('returns 400 for invalid id format', async () => {
       mockRequest.params = { id: 'invalid' };
 
-      await controller.delete(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.delete(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -341,11 +269,7 @@ describe('EntryController', () => {
         throw error;
       });
 
-      await controller.delete(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.delete(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });
@@ -357,11 +281,7 @@ describe('EntryController', () => {
       const entries = [mockEntry];
       mockService.searchEntries = jest.fn().mockReturnValue(entries);
 
-      await controller.search(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.searchEntries).toHaveBeenCalledWith('test');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -372,11 +292,7 @@ describe('EntryController', () => {
       mockRequest.query = { q: 'nonexistent' };
       mockService.searchEntries = jest.fn().mockReturnValue([]);
 
-      await controller.search(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(200);
       expect(mockResponse.json).toHaveBeenCalledWith([]);
@@ -385,11 +301,7 @@ describe('EntryController', () => {
     it('returns 400 when query parameter is missing', async () => {
       mockRequest.query = {};
 
-      await controller.search(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -403,11 +315,7 @@ describe('EntryController', () => {
       const entries = [mockEntry];
       mockService.searchEntries = jest.fn().mockReturnValue(entries);
 
-      await controller.search(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockService.searchEntries).toHaveBeenCalledWith('');
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -420,11 +328,7 @@ describe('EntryController', () => {
         throw error;
       });
 
-      await controller.search(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });

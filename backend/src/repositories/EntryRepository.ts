@@ -11,30 +11,39 @@ import { Entry, CreateEntryRequest, UpdateEntryRequest } from '../models/Entry';
  * Validates date strings in YYYY-MM-DD format
  * Also validates that the date is a real calendar date (e.g., no Feb 30th)
  */
-export const dateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-  message: 'Date must be in YYYY-MM-DD format',
-}).refine((date) => {
-  // Validate that the date is a real date
-  const [year, month, day] = date.split('-').map(Number);
-  const dateObj = new Date(year, month - 1, day);
-  return (
-    dateObj.getFullYear() === year &&
-    dateObj.getMonth() === month - 1 &&
-    dateObj.getDate() === day
+export const dateSchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: 'Date must be in YYYY-MM-DD format',
+  })
+  .refine(
+    (date) => {
+      // Validate that the date is a real date
+      const [year, month, day] = date.split('-').map(Number);
+      const dateObj = new Date(year, month - 1, day);
+      return (
+        dateObj.getFullYear() === year &&
+        dateObj.getMonth() === month - 1 &&
+        dateObj.getDate() === day
+      );
+    },
+    {
+      message: 'Invalid date',
+    }
   );
-}, {
-  message: 'Invalid date',
-});
 
 /**
  * Validates content strings
  * Must be non-empty and not only whitespace
  */
-export const contentSchema = z.string().min(1, {
-  message: 'Content must not be empty',
-}).refine((content) => content.trim().length > 0, {
-  message: 'Content must not be only whitespace',
-});
+export const contentSchema = z
+  .string()
+  .min(1, {
+    message: 'Content must not be empty',
+  })
+  .refine((content) => content.trim().length > 0, {
+    message: 'Content must not be only whitespace',
+  });
 
 /**
  * Schema for creating a new entry
@@ -56,11 +65,14 @@ export const updateEntrySchema = z.object({
  * Validates entry IDs
  * Must be an integer and not NaN
  */
-export const idSchema = z.number().int({
-  message: 'ID must be an integer',
-}).refine((id) => !Number.isNaN(id), {
-  message: 'ID must be a valid number',
-});
+export const idSchema = z
+  .number()
+  .int({
+    message: 'ID must be an integer',
+  })
+  .refine((id) => !Number.isNaN(id), {
+    message: 'ID must be a valid number',
+  });
 
 /**
  * Validates search keywords
@@ -95,12 +107,7 @@ export class EntryRepository {
       VALUES (?, ?, ?, ?)
     `);
 
-    const result = stmt.run(
-      validatedData.date,
-      validatedData.content,
-      now,
-      now
-    );
+    const result = stmt.run(validatedData.date, validatedData.content, now, now);
 
     return {
       id: result.lastInsertRowid as number,
@@ -216,10 +223,7 @@ export class EntryRepository {
     searchKeywordSchema.parse(keyword);
 
     // Escape special LIKE characters to prevent SQL pattern matching issues
-    const escapedKeyword = keyword
-      .replace(/\\/g, '\\\\')
-      .replace(/%/g, '\\%')
-      .replace(/_/g, '\\_');
+    const escapedKeyword = keyword.replace(/\\/g, '\\\\').replace(/%/g, '\\%').replace(/_/g, '\\_');
 
     const stmt = this.db.prepare(`
       SELECT id, date, content, created_at, updated_at

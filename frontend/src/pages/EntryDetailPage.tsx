@@ -10,7 +10,8 @@ function formatDateTime(isoString: string): string {
 export function EntryDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { currentEntry, isLoading, error, fetchEntry, deleteEntry, clearCurrentEntry } = useEntries();
+  const { currentEntry, isLoading, error, fetchEntry, deleteEntry, clearCurrentEntry } =
+    useEntries();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -75,13 +76,8 @@ export function EntryDetailPage() {
   if (error) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
-          {error}
-        </div>
-        <Link
-          to="/"
-          className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800"
-        >
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
+        <Link to="/" className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-1"
@@ -106,10 +102,7 @@ export function EntryDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <Link
-        to="/"
-        className="inline-flex items-center mb-6 text-blue-600 hover:text-blue-800"
-      >
+      <Link to="/" className="inline-flex items-center mb-6 text-blue-600 hover:text-blue-800">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 mr-1"

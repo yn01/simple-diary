@@ -8,7 +8,8 @@ const mockEntries: Entry[] = [
   {
     id: 1,
     date: '2026-01-31',
-    content: 'First entry content that is quite long and should be truncated after 100 characters to show only a preview of the content...',
+    content:
+      'First entry content that is quite long and should be truncated after 100 characters to show only a preview of the content...',
     created_at: '2026-01-31T12:00:00.000Z',
     updated_at: '2026-01-31T12:00:00.000Z',
   },

@@ -34,11 +34,7 @@ export class EntryController {
   /**
    * POST /api/entries - Create a new entry
    */
-  create = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { date, content } = req.body;
       const result = this.service.createEntry({ date, content });
@@ -51,11 +47,7 @@ export class EntryController {
   /**
    * GET /api/entries - Get all entries
    */
-  getAll = async (
-    _req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  getAll = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const entries = this.service.getAllEntries();
       res.status(200).json(entries);
@@ -67,11 +59,7 @@ export class EntryController {
   /**
    * GET /api/entries/:id - Get entry by ID
    */
-  getById = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = this.parseId(req.params.id);
       if (id === null) {
@@ -94,11 +82,7 @@ export class EntryController {
   /**
    * PUT /api/entries/:id - Update an entry
    */
-  update = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  update = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = this.parseId(req.params.id);
       if (id === null) {
@@ -122,11 +106,7 @@ export class EntryController {
   /**
    * DELETE /api/entries/:id - Delete an entry
    */
-  delete = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = this.parseId(req.params.id);
       if (id === null) {
@@ -149,11 +129,7 @@ export class EntryController {
   /**
    * GET /api/entries/search?q={keyword} - Search entries
    */
-  search = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  search = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const query = req.query.q;
 

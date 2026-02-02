@@ -5,17 +5,21 @@ import { EntryList } from '@/components/EntryList';
 import { SearchBar } from '@/components/SearchBar';
 
 export function EntryListPage() {
-  const { entries, isLoading, error, fetchEntries, searchEntries, setSearchQuery, searchQuery } = useEntries();
+  const { entries, isLoading, error, fetchEntries, searchEntries, setSearchQuery, searchQuery } =
+    useEntries();
   const [localSearchQuery, setLocalSearchQuery] = useState('');
 
   useEffect(() => {
     fetchEntries();
   }, [fetchEntries]);
 
-  const handleSearch = useCallback(async (query: string) => {
-    setLocalSearchQuery(query);
-    await searchEntries(query);
-  }, [searchEntries]);
+  const handleSearch = useCallback(
+    async (query: string) => {
+      setLocalSearchQuery(query);
+      await searchEntries(query);
+    },
+    [searchEntries]
+  );
 
   const handleClearSearch = useCallback(() => {
     setLocalSearchQuery('');

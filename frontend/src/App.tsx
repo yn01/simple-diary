@@ -12,7 +12,10 @@ function App() {
         <div className="min-h-screen bg-gray-50">
           <header className="bg-white shadow">
             <div className="max-w-3xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-              <Link to="/" className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+              <Link
+                to="/"
+                className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
+              >
                 Simple Diary
               </Link>
             </div>

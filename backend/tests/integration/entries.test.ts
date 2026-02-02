@@ -146,15 +146,9 @@ describe('Entry API Integration Tests', () => {
 
     it('returns all entries sorted by date descending', async () => {
       // Create entries in random order
-      await request(app)
-        .post('/api/entries')
-        .send({ date: '2026-01-29', content: 'Entry 1' });
-      await request(app)
-        .post('/api/entries')
-        .send({ date: '2026-01-31', content: 'Entry 3' });
-      await request(app)
-        .post('/api/entries')
-        .send({ date: '2026-01-30', content: 'Entry 2' });
+      await request(app).post('/api/entries').send({ date: '2026-01-29', content: 'Entry 1' });
+      await request(app).post('/api/entries').send({ date: '2026-01-31', content: 'Entry 3' });
+      await request(app).post('/api/entries').send({ date: '2026-01-30', content: 'Entry 2' });
 
       const response = await request(app).get('/api/entries').expect(200);
 
@@ -172,9 +166,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31', content: 'Test entry' });
 
       const id = createResponse.body.id;
-      const response = await request(app)
-        .get(`/api/entries/${id}`)
-        .expect(200);
+      const response = await request(app).get(`/api/entries/${id}`).expect(200);
 
       expect(response.body.id).toBe(id);
       expect(response.body.content).toBe('Test entry');
@@ -187,9 +179,7 @@ describe('Entry API Integration Tests', () => {
     });
 
     it('returns 400 for invalid id format', async () => {
-      const response = await request(app)
-        .get('/api/entries/invalid')
-        .expect(400);
+      const response = await request(app).get('/api/entries/invalid').expect(400);
 
       expect(response.body.message).toBe('Invalid ID format');
     });
@@ -279,9 +269,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31', content: 'To be deleted' });
 
       const id = createResponse.body.id;
-      await request(app)
-        .delete(`/api/entries/${id}`)
-        .expect(204);
+      await request(app).delete(`/api/entries/${id}`).expect(204);
 
       // Verify deletion
       await request(app).get(`/api/entries/${id}`).expect(404);
@@ -294,9 +282,7 @@ describe('Entry API Integration Tests', () => {
     });
 
     it('returns 400 for invalid id format', async () => {
-      const response = await request(app)
-        .delete('/api/entries/invalid')
-        .expect(400);
+      const response = await request(app).delete('/api/entries/invalid').expect(400);
 
       expect(response.body.message).toBe('Invalid ID format');
     });
@@ -316,52 +302,40 @@ describe('Entry API Integration Tests', () => {
     });
 
     it('returns matching entries', async () => {
-      const response = await request(app)
-        .get('/api/entries/search?q=learn')
-        .expect(200);
+      const response = await request(app).get('/api/entries/search?q=learn').expect(200);
 
       expect(response.body).toHaveLength(2);
     });
 
     it('returns entries sorted by date descending', async () => {
-      const response = await request(app)
-        .get('/api/entries/search?q=learn')
-        .expect(200);
+      const response = await request(app).get('/api/entries/search?q=learn').expect(200);
 
       expect(response.body[0].date).toBe('2026-01-31');
       expect(response.body[1].date).toBe('2026-01-30');
     });
 
     it('performs case-insensitive search', async () => {
-      const response = await request(app)
-        .get('/api/entries/search?q=TYPESCRIPT')
-        .expect(200);
+      const response = await request(app).get('/api/entries/search?q=TYPESCRIPT').expect(200);
 
       expect(response.body).toHaveLength(1);
       expect(response.body[0].content).toContain('TypeScript');
     });
 
     it('returns empty array when no matches found', async () => {
-      const response = await request(app)
-        .get('/api/entries/search?q=Ruby')
-        .expect(200);
+      const response = await request(app).get('/api/entries/search?q=Ruby').expect(200);
 
       expect(response.body).toEqual([]);
     });
 
     it('returns 400 when query parameter is missing', async () => {
-      const response = await request(app)
-        .get('/api/entries/search')
-        .expect(400);
+      const response = await request(app).get('/api/entries/search').expect(400);
 
       expect(response.body.message).toBe('Validation Error');
       expect(response.body.details).toContain("'q' parameter is required for search.");
     });
 
     it('returns all entries for empty query string', async () => {
-      const response = await request(app)
-        .get('/api/entries/search?q=')
-        .expect(200);
+      const response = await request(app).get('/api/entries/search?q=').expect(200);
 
       expect(response.body).toHaveLength(3);
     });
@@ -371,15 +345,11 @@ describe('Entry API Integration Tests', () => {
         .post('/api/entries')
         .send({ date: '2026-01-28', content: 'Test with % and _ special chars' });
 
-      const responsePercent = await request(app)
-        .get('/api/entries/search?q=%')
-        .expect(200);
+      const responsePercent = await request(app).get('/api/entries/search?q=%').expect(200);
 
       expect(responsePercent.body).toHaveLength(1);
 
-      const responseUnderscore = await request(app)
-        .get('/api/entries/search?q=_')
-        .expect(200);
+      const responseUnderscore = await request(app).get('/api/entries/search?q=_').expect(200);
 
       expect(responseUnderscore.body).toHaveLength(1);
     });

@@ -75,9 +75,7 @@ export function entryReducer(state: EntryState, action: EntryAction): EntryState
         ...state,
         entries: updatedEntries,
         currentEntry:
-          state.currentEntry?.id === action.payload.id
-            ? action.payload
-            : state.currentEntry,
+          state.currentEntry?.id === action.payload.id ? action.payload : state.currentEntry,
       };
     }
 
@@ -85,8 +83,7 @@ export function entryReducer(state: EntryState, action: EntryAction): EntryState
       return {
         ...state,
         entries: state.entries.filter((entry) => entry.id !== action.payload),
-        currentEntry:
-          state.currentEntry?.id === action.payload ? null : state.currentEntry,
+        currentEntry: state.currentEntry?.id === action.payload ? null : state.currentEntry,
       };
 
     case 'SET_SEARCH_QUERY':

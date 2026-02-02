@@ -285,9 +285,7 @@ describe('EntryService', () => {
     });
 
     it('throws error for undefined keyword', () => {
-      expect(() =>
-        service.searchEntries(undefined as unknown as string)
-      ).toThrow();
+      expect(() => service.searchEntries(undefined as unknown as string)).toThrow();
     });
 
     it('handles special SQL characters safely', () => {

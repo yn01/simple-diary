@@ -119,14 +119,12 @@ describe('EntryRepository', () => {
     it('handles content with special characters', () => {
       const request: CreateEntryRequest = {
         date: '2026-01-31',
-        content: "Special chars: <script>alert('xss')</script> & \"quotes\"",
+        content: 'Special chars: <script>alert(\'xss\')</script> & "quotes"',
       };
 
       const entry = repository.create(request);
 
-      expect(entry.content).toBe(
-        "Special chars: <script>alert('xss')</script> & \"quotes\""
-      );
+      expect(entry.content).toBe('Special chars: <script>alert(\'xss\')</script> & "quotes"');
     });
 
     it('handles content with SQL injection attempts', () => {

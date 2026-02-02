@@ -36,12 +36,7 @@ describe('errorHandler', () => {
         },
       ]);
 
-      errorHandler(
-        zodError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(zodError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -69,12 +64,7 @@ describe('errorHandler', () => {
         },
       ]);
 
-      errorHandler(
-        zodError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(zodError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       const jsonCall = (mockResponse.json as jest.Mock).mock.calls[0][0];
@@ -90,12 +80,7 @@ describe('errorHandler', () => {
         },
       ]);
 
-      errorHandler(
-        zodError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(zodError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -109,12 +94,7 @@ describe('errorHandler', () => {
     it('handles ApiError and returns correct status code', () => {
       const apiError = new ApiError(404, 'Entry not found');
 
-      errorHandler(
-        apiError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(apiError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(404);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -128,12 +108,7 @@ describe('errorHandler', () => {
         'Field 2 is required',
       ]);
 
-      errorHandler(
-        apiError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(apiError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -147,12 +122,7 @@ describe('errorHandler', () => {
     it('handles unknown errors and returns 500', () => {
       const unknownError = new Error('Something went wrong');
 
-      errorHandler(
-        unknownError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(unknownError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -163,12 +133,7 @@ describe('errorHandler', () => {
     it('does not expose error details for unknown errors', () => {
       const unknownError = new Error('Database connection failed: password=secret123');
 
-      errorHandler(
-        unknownError,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(unknownError, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       const jsonCall = (mockResponse.json as jest.Mock).mock.calls[0][0];
@@ -181,12 +146,7 @@ describe('errorHandler', () => {
     it('logs errors to console', () => {
       const error = new Error('Test error');
 
-      errorHandler(
-        error,
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(console.error).toHaveBeenCalledWith('Error:', error);
     });

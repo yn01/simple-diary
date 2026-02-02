@@ -106,18 +106,14 @@ jobs:
         run: |
           npm run dev &
           echo $! > backend.pid
-          sleep 5
-
-      - name: Start frontend server
-        working-directory: ./frontend
-        run: |
-          npm run dev &
-          echo $! > frontend.pid
-          sleep 5
+          # Wait for backend to be ready
+          timeout 30 bash -c 'until curl -f http://localhost:3000/health > /dev/null 2>&1; do sleep 1; done' || echo "Backend health check timeout"
 
       - name: Run E2E tests
         working-directory: ./frontend
         run: npm run e2e
+        env:
+          CI: true
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -127,11 +123,11 @@ jobs:
           path: frontend/playwright-report/
           retention-days: 7
 
-      - name: Stop servers
+      - name: Stop backend server
         if: always()
+        working-directory: ./backend
         run: |
-          if [ -f backend/backend.pid ]; then kill $(cat backend/backend.pid) || true; fi
-          if [ -f frontend/frontend.pid ]; then kill $(cat frontend/frontend.pid) || true; fi
+          if [ -f backend.pid ]; then kill $(cat backend.pid) || true; fi
 
   build:
     name: Build Check

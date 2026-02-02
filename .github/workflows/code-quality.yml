@@ -1,0 +1,64 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  format-check:
+    name: Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Check backend format
+        working-directory: ./backend
+        run: npx prettier --check "src/**/*.ts" "tests/**/*.ts"
+
+      - name: Check frontend format
+        working-directory: ./frontend
+        run: npx prettier --check "src/**/*.{ts,tsx}"
+
+  type-check:
+    name: TypeScript Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Check backend types
+        working-directory: ./backend
+        run: npx tsc --noEmit
+
+      - name: Check frontend types
+        working-directory: ./frontend
+        run: npx tsc --noEmit

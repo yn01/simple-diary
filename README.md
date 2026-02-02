@@ -2,6 +2,8 @@
 
 シンプルで使いやすいWebベースの日記アプリケーション
 
+[![CI](https://github.com/yn01/simple-diary/actions/workflows/ci.yml/badge.svg)](https://github.com/yn01/simple-diary/actions/workflows/ci.yml)
+[![Code Quality](https://github.com/yn01/simple-diary/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yn01/simple-diary/actions/workflows/code-quality.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.2-61DAFB.svg)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)

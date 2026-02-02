@@ -198,7 +198,11 @@ Q2: "データベースはどれを使用しますか？"
   - リポジトリ: https://github.com/yn01/simple-diary
   - 初回コミット（d296405）プッシュ完了
   - 75ファイル、24,612行のコード
-- [ ] CI/CD設定
+- [x] CI/CD設定
+  - GitHub Actions CI ワークフロー作成（バックエンド/フロントエンド/E2Eテスト）
+  - コード品質チェックワークフロー作成（Format/TypeScript）
+  - Dependabot 自動依存関係更新設定
+  - READMEにCIバッジ追加
 - [ ] 本番デプロイ
 - [ ] リリースノート作成
 

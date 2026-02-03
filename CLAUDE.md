@@ -212,8 +212,12 @@ Q2: "データベースはどれを使用しますか？"
   - Render.com デプロイ手順書
   - VPS デプロイ手順書
   - READMEにデプロイセクション追加
-- [ ] 本番デプロイ実行（オプション）
-- [ ] リリースノート作成（オプション）
+- [x] 本番デプロイ実行
+  - プラットフォーム: Render.com（無料プラン）
+  - バックエンド: https://simple-diary-backend.onrender.com
+  - フロントエンド: https://simple-diary-frontend.onrender.com
+  - デプロイ完了日: 2026-02-02
+  - ビルド修正: tsconfig.json、npm ci --production=false、環境変数パス設定
 
 ---
 

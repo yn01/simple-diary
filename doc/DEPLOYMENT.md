@@ -397,6 +397,64 @@ chmod 755 backend/data
 2. API URLが正しいか確認
 3. ブラウザDevToolsのネットワークタブでエラー確認
 
+### Render.comビルドエラー: 型定義ファイルが見つからない
+
+**エラー内容:**
+```
+error TS7016: Could not find a declaration file for module 'express'.
+error TS2580: Cannot find name 'process'.
+```
+
+**原因:** `NODE_ENV=production`が設定されていると、`npm install`や`npm ci`がdevDependenciesをインストールしません。TypeScriptのビルドには`@types/*`パッケージが必要です。
+
+**解決方法:**
+```yaml
+# render.yaml
+buildCommand: cd backend && npm ci --production=false && npm run build
+```
+
+`--production=false`フラグを使用して、devDependenciesを含むすべての依存関係をインストールします。
+
+### Render.comビルドエラー: tsconfig.jsonのtypes配列
+
+**エラー内容:**
+```
+error TS2688: Cannot find type definition file for 'jest'.
+error TS2688: Cannot find type definition file for 'node'.
+```
+
+**原因:** `tsconfig.json`の`types`配列に`jest`や`node`を指定すると、それらの型定義パッケージが必須になります。
+
+**解決方法:**
+```json
+// tsconfig.json - types配列を削除
+{
+  "compilerOptions": {
+    // ...
+    // "types": ["node", "jest"] <- この行を削除
+  }
+}
+```
+
+TypeScriptが自動的に必要な型定義を解決するため、`types`配列は不要です。
+
+### フロントエンドからAPIに接続できない（404エラー）
+
+**エラー内容:**
+```
+POST https://simple-diary-backend.onrender.com/entries 404 (Not Found)
+```
+
+**原因:** 環境変数`VITE_API_BASE_URL`にバックエンドのルートURL（`https://simple-diary-backend.onrender.com`）を設定すると、APIパス（`/api`）が含まれません。
+
+**解決方法:**
+```bash
+# フロントエンドの環境変数
+VITE_API_BASE_URL=https://simple-diary-backend.onrender.com/api
+```
+
+`/api`を含めたフルパスを設定してください。
+
 ### Render.comでスリープから復帰しない
 
 - 有料プラン（$7/月）にアップグレード

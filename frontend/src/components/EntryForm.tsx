@@ -76,11 +76,15 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           value={date}
           onChange={(e) => setDate(e.target.value)}
           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white text-gray-900 dark:bg-slate-900 dark:text-slate-100 ${
-            errors.date ? 'border-red-300 dark:border-red-800' : 'border-gray-300 dark:border-slate-700'
+            errors.date
+              ? 'border-red-300 dark:border-red-800'
+              : 'border-gray-300 dark:border-slate-700'
           }`}
           disabled={isSubmitting}
         />
-        {errors.date && <p className="mt-1 text-sm text-red-600 dark:text-red-300">{errors.date}</p>}
+        {errors.date && (
+          <p className="mt-1 text-sm text-red-600 dark:text-red-300">{errors.date}</p>
+        )}
       </div>
 
       <div>
@@ -96,7 +100,9 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           onChange={(e) => setContent(e.target.value)}
           rows={10}
           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y bg-white text-gray-900 placeholder:text-gray-400 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-            errors.content ? 'border-red-300 dark:border-red-800' : 'border-gray-300 dark:border-slate-700'
+            errors.content
+              ? 'border-red-300 dark:border-red-800'
+              : 'border-gray-300 dark:border-slate-700'
           }`}
           placeholder="Write your diary entry..."
           disabled={isSubmitting}

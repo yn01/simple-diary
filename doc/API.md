@@ -16,6 +16,7 @@ Simple Diary APIは、日記エントリーのCRUD操作と検索機能を提供
 
 | Method | Endpoint | 説明 |
 |--------|----------|------|
+| GET | `/health` | ヘルスチェック |
 | POST | `/api/entries` | エントリー作成 |
 | GET | `/api/entries` | エントリー一覧取得 |
 | GET | `/api/entries/:id` | エントリー詳細取得 |
@@ -25,7 +26,27 @@ Simple Diary APIは、日記エントリーのCRUD操作と検索機能を提供
 
 ---
 
-## 1. エントリー作成
+## 1. ヘルスチェック
+
+サーバーの稼働確認を行います。
+
+### エンドポイント
+```
+GET /health
+```
+
+### レスポンス
+
+#### 成功 (200 OK)
+```json
+{
+  "status": "ok"
+}
+```
+
+---
+
+## 2. エントリー作成
 
 新しい日記エントリーを作成します。
 
@@ -70,7 +91,7 @@ Content-Type: application/json
 #### エラー (400 Bad Request)
 ```json
 {
-  "message": "Validation error",
+  "message": "Validation Error",
   "details": [
     "Content must not be empty"
   ]
@@ -106,7 +127,7 @@ const entry = await response.json();
 
 ---
 
-## 2. エントリー一覧取得
+## 3. エントリー一覧取得
 
 全ての日記エントリーを日付降順で取得します。
 
@@ -158,7 +179,7 @@ const entries = await response.json();
 
 ---
 
-## 3. エントリー詳細取得
+## 4. エントリー詳細取得
 
 指定されたIDの日記エントリーを取得します。
 
@@ -215,7 +236,7 @@ const entry = await response.json();
 
 ---
 
-## 4. エントリー更新
+## 5. エントリー更新
 
 指定されたIDの日記エントリーを更新します。
 
@@ -275,7 +296,7 @@ Content-Type: application/json
 #### エラー (400 Bad Request)
 ```json
 {
-  "message": "Validation error",
+  "message": "Validation Error",
   "details": [
     "Content must not be empty"
   ]
@@ -311,7 +332,7 @@ const entry = await response.json();
 
 ---
 
-## 5. エントリー削除
+## 6. エントリー削除
 
 指定されたIDの日記エントリーを削除します。
 
@@ -362,7 +383,7 @@ await fetch('http://localhost:3000/api/entries/1', {
 
 ---
 
-## 6. エントリー検索
+## 7. エントリー検索
 
 キーワードで日記エントリーを検索します（LIKE検索）。
 
@@ -402,6 +423,16 @@ GET /api/entries/search
 **注**:
 - 検索結果は日付降順でソートされます
 - 部分一致検索です（例: "旅行" で "旅行に行く" もヒット）
+
+#### エラー (400 Bad Request)
+```json
+{
+  "message": "Validation Error",
+  "details": [
+    "'q' parameter is required for search."
+  ]
+}
+```
 
 ### サンプルコード
 

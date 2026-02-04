@@ -63,7 +63,7 @@ export function EntryEditPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-gray-500">Loading...</span>
+          <span className="text-gray-500 dark:text-slate-400">Loading...</span>
         </div>
       </div>
     );
@@ -72,8 +72,13 @@ export function EntryEditPage() {
   if (error) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
-        <Link to="/" className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 dark:bg-red-950/40 dark:border-red-900 dark:text-red-200">
+          {error}
+        </div>
+        <Link
+          to="/"
+          className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-1"
@@ -98,8 +103,8 @@ export function EntryEditPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Entry</h1>
-      <div className="bg-white rounded-lg shadow p-6">
+      <h1 className="text-2xl font-bold text-gray-900 mb-6 dark:text-slate-100">Edit Entry</h1>
+      <div className="bg-white rounded-lg shadow p-6 dark:bg-slate-900 dark:border dark:border-slate-700">
         <EntryForm
           entry={currentEntry}
           onSubmit={handleSubmit}

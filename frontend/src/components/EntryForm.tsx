@@ -58,13 +58,16 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {submitError && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 dark:bg-red-950/40 dark:border-red-900 dark:text-red-200">
           {submitError}
         </div>
       )}
 
       <div>
-        <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="date"
+          className="block text-sm font-medium text-gray-700 mb-1 dark:text-slate-300"
+        >
           Date
         </label>
         <input
@@ -72,16 +75,19 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all ${
-            errors.date ? 'border-red-300' : 'border-gray-300'
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white text-gray-900 dark:bg-slate-900 dark:text-slate-100 ${
+            errors.date ? 'border-red-300 dark:border-red-800' : 'border-gray-300 dark:border-slate-700'
           }`}
           disabled={isSubmitting}
         />
-        {errors.date && <p className="mt-1 text-sm text-red-600">{errors.date}</p>}
+        {errors.date && <p className="mt-1 text-sm text-red-600 dark:text-red-300">{errors.date}</p>}
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="content"
+          className="block text-sm font-medium text-gray-700 mb-1 dark:text-slate-300"
+        >
           Content
         </label>
         <textarea
@@ -89,13 +95,15 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={10}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y ${
-            errors.content ? 'border-red-300' : 'border-gray-300'
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y bg-white text-gray-900 placeholder:text-gray-400 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+            errors.content ? 'border-red-300 dark:border-red-800' : 'border-gray-300 dark:border-slate-700'
           }`}
           placeholder="Write your diary entry..."
           disabled={isSubmitting}
         />
-        {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
+        {errors.content && (
+          <p className="mt-1 text-sm text-red-600 dark:text-red-300">{errors.content}</p>
+        )}
       </div>
 
       <div className="flex gap-4">
@@ -139,7 +147,7 @@ export function EntryForm({ entry, onSubmit, onCancel, submitError }: EntryFormP
             type="button"
             onClick={onCancel}
             disabled={isSubmitting}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium"
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
           >
             Cancel
           </button>

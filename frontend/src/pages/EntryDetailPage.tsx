@@ -67,7 +67,7 @@ export function EntryDetailPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-gray-500">Loading...</span>
+          <span className="text-gray-500 dark:text-slate-400">Loading...</span>
         </div>
       </div>
     );
@@ -76,8 +76,13 @@ export function EntryDetailPage() {
   if (error) {
     return (
       <div className="max-w-2xl mx-auto">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
-        <Link to="/" className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 dark:bg-red-950/40 dark:border-red-900 dark:text-red-200">
+          {error}
+        </div>
+        <Link
+          to="/"
+          className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-1"
@@ -102,7 +107,10 @@ export function EntryDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <Link to="/" className="inline-flex items-center mb-6 text-blue-600 hover:text-blue-800">
+      <Link
+        to="/"
+        className="inline-flex items-center mb-6 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 mr-1"
@@ -118,13 +126,15 @@ export function EntryDetailPage() {
         Back to list
       </Link>
 
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-6 dark:bg-slate-900 dark:border dark:border-slate-700">
         <div className="flex justify-between items-start mb-6">
-          <h1 className="text-2xl font-bold text-blue-600">{currentEntry.date}</h1>
+          <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            {currentEntry.date}
+          </h1>
           <div className="flex gap-2">
             <Link
               to={`/entries/${currentEntry.id}/edit`}
-              className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+              className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm font-medium dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +148,7 @@ export function EntryDetailPage() {
             </Link>
             <button
               onClick={handleDeleteClick}
-              className="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm font-medium"
+              className="inline-flex items-center px-3 py-1.5 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors text-sm font-medium dark:bg-red-950/40 dark:text-red-200 dark:hover:bg-red-900/50"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -158,10 +168,12 @@ export function EntryDetailPage() {
         </div>
 
         <div className="prose max-w-none">
-          <p className="text-gray-700 whitespace-pre-wrap break-words">{currentEntry.content}</p>
+          <p className="text-gray-700 whitespace-pre-wrap break-words dark:text-slate-200">
+            {currentEntry.content}
+          </p>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500 space-y-1">
+        <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500 space-y-1 dark:border-slate-700 dark:text-slate-400">
           <p>
             <span className="font-medium">Created:</span> {formatDateTime(currentEntry.created_at)}
           </p>
@@ -174,16 +186,18 @@ export function EntryDetailPage() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md mx-4 shadow-xl">
-            <h2 className="text-lg font-bold text-gray-900 mb-2">Delete Entry</h2>
-            <p className="text-gray-600 mb-6">
+          <div className="bg-white rounded-lg p-6 max-w-md mx-4 shadow-xl dark:bg-slate-900 dark:border dark:border-slate-700">
+            <h2 className="text-lg font-bold text-gray-900 mb-2 dark:text-slate-100">
+              Delete Entry
+            </h2>
+            <p className="text-gray-600 mb-6 dark:text-slate-300">
               Are you sure you want to delete this entry? This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={handleDeleteCancel}
                 disabled={isDeleting}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
               >
                 Cancel
               </button>

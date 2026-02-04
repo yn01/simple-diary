@@ -30,7 +30,7 @@ export function EntryListPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">Entries</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Entries</h1>
         <Link
           to="/entries/new"
           className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"

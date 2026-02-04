@@ -39,7 +39,7 @@ export function EntryList({ entries, isLoading = false, error = null }: EntryLis
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-gray-500">Loading...</span>
+          <span className="text-gray-500 dark:text-slate-400">Loading...</span>
         </div>
       </div>
     );
@@ -47,7 +47,9 @@ export function EntryList({ entries, isLoading = false, error = null }: EntryLis
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">{error}</div>
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 dark:bg-red-950/40 dark:border-red-900 dark:text-red-200">
+        {error}
+      </div>
     );
   }
 
@@ -55,7 +57,7 @@ export function EntryList({ entries, isLoading = false, error = null }: EntryLis
     return (
       <div className="text-center py-12">
         <svg
-          className="mx-auto h-12 w-12 text-gray-400"
+          className="mx-auto h-12 w-12 text-gray-400 dark:text-slate-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -67,8 +69,12 @@ export function EntryList({ entries, isLoading = false, error = null }: EntryLis
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
-        <h3 className="mt-2 text-sm font-medium text-gray-900">No entries</h3>
-        <p className="mt-1 text-sm text-gray-500">Get started by creating a new entry.</p>
+        <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-slate-100">
+          No entries
+        </h3>
+        <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
+          Get started by creating a new entry.
+        </p>
       </div>
     );
   }
@@ -79,13 +85,15 @@ export function EntryList({ entries, isLoading = false, error = null }: EntryLis
         <Link
           key={entry.id}
           to={`/entries/${entry.id}`}
-          className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow border border-gray-200"
+          className="block bg-white rounded-lg shadow hover:shadow-md transition-shadow border border-gray-200 dark:bg-slate-900 dark:border-slate-700"
         >
           <div className="p-4">
             <div className="flex justify-between items-start mb-2">
-              <time className="text-sm font-medium text-blue-600">{entry.date}</time>
+              <time className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                {entry.date}
+              </time>
             </div>
-            <p className="text-gray-700 whitespace-pre-wrap break-words">
+            <p className="text-gray-700 whitespace-pre-wrap break-words dark:text-slate-200">
               {truncateContent(entry.content)}
             </p>
           </div>

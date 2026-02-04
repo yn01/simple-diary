@@ -29,8 +29,8 @@ export function EntryCreatePage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">New Entry</h1>
-      <div className="bg-white rounded-lg shadow p-6">
+      <h1 className="text-2xl font-bold text-gray-900 mb-6 dark:text-slate-100">New Entry</h1>
+      <div className="bg-white rounded-lg shadow p-6 dark:bg-slate-900 dark:border dark:border-slate-700">
         <EntryForm onSubmit={handleSubmit} onCancel={handleCancel} submitError={submitError} />
       </div>
     </div>

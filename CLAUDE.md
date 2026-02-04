@@ -352,7 +352,7 @@ Q2: "データベースはどれを使用しますか？"
 - [ ] 画像添付
 - [ ] マークダウン対応
 - [ ] エクスポート機能
-- [ ] ダークモード
+- [x] ダークモード
 
 ---
 
@@ -419,3 +419,4 @@ Q2: "データベースはどれを使用しますか？"
 - 2026-02-02: CI/CD設定完了（GitHub Actions CI/Code Quality、Dependabot）
 - 2026-02-02: デプロイ準備完了（DEPLOYMENT.md、Docker設定、Render.com/VPS手順書）
 - 2026-02-02: Phase 5ドキュメントレビュー実施（Codex、6件指摘：UI言語不一致、API仕様書誤記等）
+- 2026-02-04: ダークモード実装、ドキュメント更新（REQUIREMENTS/USER_MANUAL/README）

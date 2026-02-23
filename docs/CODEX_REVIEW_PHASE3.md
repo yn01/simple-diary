@@ -19,7 +19,7 @@
 - `backend/src/services/EntryService.ts:23, 42, 57`
 - `backend/src/controllers/EntryController.ts:33, 66, 93, 148`
 - `frontend/src/services/api.ts:37, 45, 57, 84`
-- `doc/DESIGN.md:156, 207, 236, 264`
+- `docs/DESIGN.md:156, 207, 236, 264`
 
 **推奨対応**: DESIGN.mdの仕様に合わせ、バックエンド実装を修正する
 
@@ -35,7 +35,7 @@
 
 **影響箇所**:
 - `backend/src/controllers/EntryController.ts:121`
-- `doc/DESIGN.md:248`
+- `docs/DESIGN.md:248`
 
 **推奨対応**: HTTP 204を返すように修正
 
@@ -50,7 +50,7 @@
 **影響箇所**:
 - `backend/src/middlewares/validateRequest.ts:27`
 - `backend/src/models/Entry.ts:14`
-- `doc/DESIGN.md:125`
+- `docs/DESIGN.md:125`
 
 **現状**: DESIGN.md v1.1.0では `date` フィールドを含むように修正済みのため、実装と設計は一致している。Codexは古いバージョンの設計書を参照した可能性がある。
 

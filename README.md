@@ -204,7 +204,7 @@ simple-diary/
 │   │   ├── types/           # 型定義
 │   │   └── App.tsx          # ルートコンポーネント
 │   └── tests/               # テスト
-└── doc/                     # ドキュメント
+└── docs/                     # ドキュメント
     ├── REQUIREMENTS.md      # 要件定義書
     ├── DESIGN.md            # 設計書
     ├── API.md               # API仕様書
@@ -282,7 +282,7 @@ npm run lint
 | DELETE | /api/entries/:id | エントリー削除 |
 | GET | /api/entries/search?q={keyword} | エントリー検索 |
 
-詳細は [API.md](doc/API.md) を参照してください。
+詳細は [API.md](docs/API.md) を参照してください。
 
 ## セキュリティ
 
@@ -317,7 +317,7 @@ docker-compose down
 - Render.com（推奨）
 - VPS (DigitalOcean, Linode等)
 
-詳細は [DEPLOYMENT.md](doc/DEPLOYMENT.md) を参照してください。
+詳細は [DEPLOYMENT.md](docs/DEPLOYMENT.md) を参照してください。
 
 ## 貢献
 
@@ -339,12 +339,12 @@ MIT License - 詳細は [LICENSE](LICENSE) を参照してください。
 
 ## リンク
 
-- [要件定義書](doc/REQUIREMENTS.md)
-- [設計書](doc/DESIGN.md)
-- [API仕様書](doc/API.md)
-- [ユーザーマニュアル](doc/USER_MANUAL.md)
-- [開発者ドキュメント](doc/DEVELOPMENT.md)
-- [デプロイガイド](doc/DEPLOYMENT.md)
+- [要件定義書](docs/REQUIREMENTS.md)
+- [設計書](docs/DESIGN.md)
+- [API仕様書](docs/API.md)
+- [ユーザーマニュアル](docs/USER_MANUAL.md)
+- [開発者ドキュメント](docs/DEVELOPMENT.md)
+- [デプロイガイド](docs/DEPLOYMENT.md)
 
 ---
 

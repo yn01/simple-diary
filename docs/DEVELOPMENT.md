@@ -224,7 +224,7 @@ simple-diary/
 │   ├── vitest.config.ts
 │   ├── playwright.config.ts
 │   └── tailwind.config.js
-├── doc/                        # ドキュメント
+├── docs/                        # ドキュメント
 │   ├── REQUIREMENTS.md         # 要件定義書
 │   ├── DESIGN.md               # 設計書
 │   ├── API.md                  # API仕様書

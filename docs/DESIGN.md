@@ -7,7 +7,7 @@
 | プロジェクト名 | Simple Diary                                                             |
 | 概要         | 日々の記録を簡単に行えるシンプルな日記アプリケーション               |
 | 技術スタック   | フロントエンド: React + Vite (TypeScript), バックエンド: Node.js + Express (TypeScript), データベース: SQLite |
-| 要件定義書   | [doc/REQUIREMENTS.md](doc/REQUIREMENTS.md) v1.1.0                      |
+| 要件定義書   | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) v1.1.0                      |
 | 作成日       | 2026-01-31                                                               |
 | バージョン     | 1.1.0                                                                    |
 
@@ -70,7 +70,7 @@
 │   │   └── app.ts
 │   ├── tests/
 │   └── package.json
-└── doc/
+└── docs/
     ├── REQUIREMENTS.md
     └── DESIGN.md (本ファイル)
 ```

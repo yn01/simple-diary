@@ -135,7 +135,7 @@ export class EntryController {
 
       if (query === undefined) {
         res.status(400).json({
-          message: 'Validation Error',
+          message: 'Validation error',
           details: ["'q' parameter is required for search."],
         });
         return;

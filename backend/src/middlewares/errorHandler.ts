@@ -47,7 +47,7 @@ export const errorHandler = (
     });
 
     const response: ErrorResponse = {
-      message: 'Validation Error',
+      message: 'Validation error',
       details,
     };
 

@@ -91,7 +91,7 @@ Content-Type: application/json
 #### エラー (400 Bad Request)
 ```json
 {
-  "message": "Validation Error",
+  "message": "Validation error",
   "details": [
     "Content must not be empty"
   ]
@@ -296,7 +296,7 @@ Content-Type: application/json
 #### エラー (400 Bad Request)
 ```json
 {
-  "message": "Validation Error",
+  "message": "Validation error",
   "details": [
     "Content must not be empty"
   ]
@@ -427,7 +427,7 @@ GET /api/entries/search
 #### エラー (400 Bad Request)
 ```json
 {
-  "message": "Validation Error",
+  "message": "Validation error",
   "details": [
     "'q' parameter is required for search."
   ]

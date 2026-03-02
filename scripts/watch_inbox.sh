@@ -85,21 +85,32 @@ send_to_agent() {
     return 1
   fi
 
-  local prompt="inboxに新しいメッセージが届いています。以下を読んで指示を実行してください。
+  # メッセージを一時ファイルに書き出して読み込ませる（複数行対応）
+  local tmp_prompt
+  tmp_prompt=$(mktemp /tmp/agent_msg_XXXXXX.txt)
+  cat > "$tmp_prompt" << MSGEOF
+inboxに新しいメッセージが届いています。以下を読んで指示を実行してください。
 完了後はorchestratorのinboxに完了報告を送ってください。
 
 ファイル: $(basename $message_file)
 ---
-$message_content"
+$message_content
+MSGEOF
 
-  # tmuxにテキストを送信
-  tmux send-keys -t "agents:$tmux_target" "" Enter 2>/dev/null || \
-  tmux send-keys -t "$tmux_target" "" Enter 2>/dev/null
+  local prompt_text
+  prompt_text=$(cat "$tmp_prompt")
+  rm -f "$tmp_prompt"
 
+  # 念のため現在の入力をクリア
+  tmux send-keys -t "agents:$tmux_target" "" 2>/dev/null ||   tmux send-keys -t "$tmux_target" "" 2>/dev/null
   sleep 0.3
 
-  tmux send-keys -t "agents:$tmux_target" "$prompt" Enter 2>/dev/null || \
-  tmux send-keys -t "$tmux_target" "$prompt" Enter 2>/dev/null
+  # テキスト送信（Enterなし）
+  tmux send-keys -t "agents:$tmux_target" "$prompt_text" 2>/dev/null ||   tmux send-keys -t "$tmux_target" "$prompt_text" 2>/dev/null
+  sleep 0.5
+
+  # Enterを別途送信（確実に実行させる）
+  tmux send-keys -t "agents:$tmux_target" "" Enter 2>/dev/null ||   tmux send-keys -t "$tmux_target" "" Enter 2>/dev/null
 
   echo -e "${GREEN}[watch:$AGENT_NAME] メッセージ送信完了: $(basename $message_file)${NC}" >&2
   return 0

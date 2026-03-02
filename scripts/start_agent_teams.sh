@@ -245,6 +245,14 @@ for agent in "${LAUNCH_AGENTS[@]}"; do
   tmux new-session -d -s "agents" -n "$agent" "cd '$WORKTREE_PATH' && claude --model $model; exec zsh" 2>/dev/null || \
   echo -e "    ${YELLOW}⚠ 手動起動: cd $WORKTREE_PATH && claude --model $model${NC}"
   sleep 0.5
+
+  # inbox監視スクリプトをバックグラウンドで起動（orchestratorは不要）
+  if [ "$agent" != "orchestrator" ]; then
+    mkdir -p "$PROJECT_ROOT/.claude/logs"
+    bash "$PROJECT_ROOT/scripts/watch_inbox.sh" "$agent" >> "$PROJECT_ROOT/.claude/logs/watch_${agent}.log" 2>&1 &
+    echo "    → inbox監視開始 (PID: $!)"
+    echo "$!" >> "$PROJECT_ROOT/.claude/state/watch_pids.txt"
+  fi
 done
 
 echo ""

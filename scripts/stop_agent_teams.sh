@@ -176,6 +176,19 @@ echo ""
 # =============================================================================
 echo -e "${YELLOW}[4/4] 全tmuxセッションを終了...${NC}"
 
+# inbox監視プロセスを終了
+echo "  inbox監視プロセスを停止中..."
+PIDS_FILE="$PROJECT_ROOT/.claude/state/watch_pids.txt"
+if [ -f "$PIDS_FILE" ]; then
+  while IFS= read -r pid; do
+    if kill -0 "$pid" 2>/dev/null; then
+      kill "$pid" 2>/dev/null && echo "  ✓ watch PID $pid 終了"
+    fi
+  done < "$PIDS_FILE"
+  rm -f "$PIDS_FILE"
+fi
+
+
 CLOSED=0
 for agent in "${AGENTS[@]}"; do
   # ウィンドウを閉じる

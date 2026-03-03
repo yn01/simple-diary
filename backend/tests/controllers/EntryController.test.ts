@@ -306,7 +306,7 @@ describe('EntryController', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        message: 'Validation Error',
+        message: 'Validation error',
         details: ["'q' parameter is required for search."],
       });
     });

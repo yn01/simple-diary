@@ -40,7 +40,7 @@ describe('errorHandler', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        message: 'Validation Error',
+        message: 'Validation error',
         details: ["'content': Content must not be empty"],
       });
     });
@@ -84,7 +84,7 @@ describe('errorHandler', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(400);
       expect(mockResponse.json).toHaveBeenCalledWith({
-        message: 'Validation Error',
+        message: 'Validation error',
         details: ['Invalid input'],
       });
     });

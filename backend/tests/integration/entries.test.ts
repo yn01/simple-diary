@@ -77,7 +77,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31', content: '' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
       expect(response.body.details).toBeDefined();
     });
 
@@ -87,7 +87,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: 'invalid-date', content: 'Test content' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('returns 400 for missing date', async () => {
@@ -96,7 +96,7 @@ describe('Entry API Integration Tests', () => {
         .send({ content: 'Test content' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('returns 400 for missing content', async () => {
@@ -105,7 +105,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('returns 400 for whitespace-only content', async () => {
@@ -114,7 +114,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31', content: '   ' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('returns 400 for invalid date (Feb 30th)', async () => {
@@ -123,7 +123,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-02-30', content: 'Test content' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('handles special characters in content', async () => {
@@ -244,7 +244,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: '2026-01-31', content: '' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
 
     it('returns 400 for invalid date format', async () => {
@@ -258,7 +258,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: 'invalid-date', content: 'Updated content' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
     });
   });
 
@@ -330,7 +330,7 @@ describe('Entry API Integration Tests', () => {
     it('returns 400 when query parameter is missing', async () => {
       const response = await request(app).get('/api/entries/search').expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
       expect(response.body.details).toContain("'q' parameter is required for search.");
     });
 
@@ -362,7 +362,7 @@ describe('Entry API Integration Tests', () => {
         .send({ date: 'bad-date', content: '' })
         .expect(400);
 
-      expect(response.body.message).toBe('Validation Error');
+      expect(response.body.message).toBe('Validation error');
       expect(response.body.details).toBeInstanceOf(Array);
       expect(response.body.details.length).toBeGreaterThan(0);
     });

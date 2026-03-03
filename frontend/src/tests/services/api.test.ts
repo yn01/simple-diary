@@ -170,6 +170,43 @@ describe('API Service', () => {
     });
   });
 
+  describe('getEntriesByMonth', () => {
+    it('fetches entries for a specific month', async () => {
+      const mockEntries: Entry[] = [mockEntry];
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockEntries),
+      });
+
+      const result = await api.getEntriesByMonth(2026, 1);
+
+      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=1', { signal: undefined });
+      expect(result).toEqual(mockEntries);
+    });
+
+    it('passes abort signal to fetch', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve([mockEntry]),
+      });
+      const controller = new AbortController();
+
+      await api.getEntriesByMonth(2026, 3, controller.signal);
+
+      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=3', { signal: controller.signal });
+    });
+
+    it('throws error when fetch fails', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Server Error',
+      });
+
+      await expect(api.getEntriesByMonth(2026, 1)).rejects.toThrow('Failed to fetch entries by month');
+    });
+  });
+
   describe('searchEntries', () => {
     it('searches entries by keyword', async () => {
       const mockEntries: Entry[] = [mockEntry];

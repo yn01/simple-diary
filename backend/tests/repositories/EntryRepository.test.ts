@@ -572,4 +572,45 @@ describe('EntryRepository', () => {
       ).toThrow();
     });
   });
+
+  describe('findByMonth', () => {
+    beforeEach(() => {
+      repository.create({ date: '2024-03-01', content: 'March entry 1' });
+      repository.create({ date: '2024-03-15', content: 'March entry 2' });
+      repository.create({ date: '2024-03-31', content: 'March entry 3' });
+      repository.create({ date: '2024-02-14', content: 'February entry' });
+      repository.create({ date: '2024-04-01', content: 'April entry' });
+      repository.create({ date: '2023-03-01', content: 'Last year March' });
+    });
+
+    it('returns entries for the specified month', () => {
+      const entries = repository.findByMonth(2024, 3);
+      expect(entries).toHaveLength(3);
+      entries.forEach((e) => expect(e.date.startsWith('2024-03')).toBe(true));
+    });
+
+    it('returns entries sorted by date DESC, id DESC', () => {
+      const entries = repository.findByMonth(2024, 3);
+      expect(entries[0].date).toBe('2024-03-31');
+      expect(entries[1].date).toBe('2024-03-15');
+      expect(entries[2].date).toBe('2024-03-01');
+    });
+
+    it('returns empty array when no entries match', () => {
+      const entries = repository.findByMonth(2024, 12);
+      expect(entries).toHaveLength(0);
+    });
+
+    it('does not return entries from different year same month', () => {
+      const entries = repository.findByMonth(2024, 3);
+      expect(entries).toHaveLength(3);
+      expect(entries.every((e) => e.date.startsWith('2024-03'))).toBe(true);
+    });
+
+    it('handles single-digit month correctly', () => {
+      const entries = repository.findByMonth(2024, 2);
+      expect(entries).toHaveLength(1);
+      expect(entries[0].content).toBe('February entry');
+    });
+  });
 });

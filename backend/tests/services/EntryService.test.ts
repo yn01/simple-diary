@@ -301,4 +301,66 @@ describe('EntryService', () => {
       expect(resultUnderscore).toHaveLength(1);
     });
   });
+
+  describe('getEntriesByMonth', () => {
+    beforeEach(() => {
+      service.createEntry({ date: '2024-01-15', content: 'January entry' });
+      service.createEntry({ date: '2024-03-01', content: 'March entry 1' });
+      service.createEntry({ date: '2024-03-20', content: 'March entry 2' });
+      service.createEntry({ date: '2024-12-31', content: 'December entry' });
+    });
+
+    it('returns entries for the specified month', () => {
+      const entries = service.getEntriesByMonth(2024, 3);
+      expect(entries).toHaveLength(2);
+      entries.forEach((e) => expect(e.date.startsWith('2024-03')).toBe(true));
+    });
+
+    it('returns entries for month=1 (boundary)', () => {
+      const entries = service.getEntriesByMonth(2024, 1);
+      expect(entries).toHaveLength(1);
+      expect(entries[0].content).toBe('January entry');
+    });
+
+    it('returns entries for month=12 (boundary)', () => {
+      const entries = service.getEntriesByMonth(2024, 12);
+      expect(entries).toHaveLength(1);
+      expect(entries[0].content).toBe('December entry');
+    });
+
+    it('returns empty array when no entries match', () => {
+      const entries = service.getEntriesByMonth(2024, 7);
+      expect(entries).toHaveLength(0);
+    });
+
+    it('throws error for month=0', () => {
+      expect(() => service.getEntriesByMonth(2024, 0)).toThrow(
+        'month must be an integer between 1 and 12'
+      );
+    });
+
+    it('throws error for month=13', () => {
+      expect(() => service.getEntriesByMonth(2024, 13)).toThrow(
+        'month must be an integer between 1 and 12'
+      );
+    });
+
+    it('throws error for non-integer year', () => {
+      expect(() => service.getEntriesByMonth(20.5, 3)).toThrow(
+        'year must be a 4-digit integer'
+      );
+    });
+
+    it('throws error for year < 1000', () => {
+      expect(() => service.getEntriesByMonth(999, 3)).toThrow(
+        'year must be a 4-digit integer'
+      );
+    });
+
+    it('throws error for year > 9999', () => {
+      expect(() => service.getEntriesByMonth(10000, 3)).toThrow(
+        'year must be a 4-digit integer'
+      );
+    });
+  });
 });

@@ -68,6 +68,19 @@ export class EntryService {
    * @returns Array of matching entries sorted by date descending
    * @throws ZodError if keyword is null or undefined
    */
+  /**
+   * Retrieves entries for a specific month
+   */
+  getEntriesByMonth(year: number, month: number): Entry[] {
+    if (!Number.isInteger(year) || year < 1000 || year > 9999) {
+      throw new Error('year must be a 4-digit integer');
+    }
+    if (!Number.isInteger(month) || month < 1 || month > 12) {
+      throw new Error('month must be an integer between 1 and 12');
+    }
+    return this.repository.findByMonth(year, month);
+  }
+
   searchEntries(keyword: string): Entry[] {
     return this.repository.search(keyword);
   }

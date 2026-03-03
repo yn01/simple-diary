@@ -27,7 +27,7 @@ describe('EntryController', () => {
     mockService = new EntryService(null as any) as jest.Mocked<EntryService>;
     controller = new EntryController(mockService);
 
-    mockRequest = {};
+    mockRequest = { query: {} };
     mockResponse = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn().mockReturnThis(),
@@ -330,6 +330,91 @@ describe('EntryController', () => {
       });
 
       await controller.search(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockNext).toHaveBeenCalledWith(error);
+    });
+  });
+
+  describe('getAll with year/month query params', () => {
+    const mockEntries: Entry[] = [mockEntry];
+
+    it('returns filtered entries when year and month are provided', async () => {
+      mockRequest.query = { year: '2024', month: '3' };
+      mockService.getEntriesByMonth = jest.fn().mockReturnValue(mockEntries);
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockService.getEntriesByMonth).toHaveBeenCalledWith(2024, 3);
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+      expect(mockResponse.json).toHaveBeenCalledWith(mockEntries);
+    });
+
+    it('returns all entries when no query params', async () => {
+      mockRequest.query = {};
+      mockService.getAllEntries = jest.fn().mockReturnValue(mockEntries);
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockService.getAllEntries).toHaveBeenCalled();
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+    });
+
+    it('returns 400 when only year is provided', async () => {
+      mockRequest.query = { year: '2024' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('returns 400 when only month is provided', async () => {
+      mockRequest.query = { month: '3' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('returns 400 for invalid year', async () => {
+      mockRequest.query = { year: 'abc', month: '3' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('returns 400 for invalid month (0)', async () => {
+      mockRequest.query = { year: '2024', month: '0' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('returns 400 for invalid month (13)', async () => {
+      mockRequest.query = { year: '2024', month: '13' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('returns 400 for non-4-digit year', async () => {
+      mockRequest.query = { year: '24', month: '3' };
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+    });
+
+    it('calls next with error when service throws in month filter', async () => {
+      mockRequest.query = { year: '2024', month: '3' };
+      const error = new Error('Service error');
+      mockService.getEntriesByMonth = jest.fn().mockImplementation(() => {
+        throw error;
+      });
+
+      await controller.getAll(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalledWith(error);
     });

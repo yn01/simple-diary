@@ -47,8 +47,46 @@ export class EntryController {
   /**
    * GET /api/entries - Get all entries
    */
-  getAll = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+      const { year, month } = req.query;
+
+      if (year !== undefined || month !== undefined) {
+        if (year === undefined || month === undefined) {
+          res.status(400).json({
+            message: 'Validation error',
+            details: ['Both year and month parameters are required'],
+          });
+          return;
+        }
+
+        const yearStr = String(year);
+        const monthStr = String(month);
+
+        if (!/^\d{4}$/.test(yearStr)) {
+          res.status(400).json({
+            message: 'Validation error',
+            details: ['year must be a 4-digit integer'],
+          });
+          return;
+        }
+
+        if (!/^(0?[1-9]|1[0-2])$/.test(monthStr)) {
+          res.status(400).json({
+            message: 'Validation error',
+            details: ['month must be an integer between 1 and 12'],
+          });
+          return;
+        }
+
+        const yearNum = parseInt(yearStr, 10);
+        const monthNum = parseInt(monthStr, 10);
+
+        const entries = this.service.getEntriesByMonth(yearNum, monthNum);
+        res.status(200).json(entries);
+        return;
+      }
+
       const entries = this.service.getAllEntries();
       res.status(200).json(entries);
     } catch (error) {

@@ -5,6 +5,7 @@ import { EntryListPage } from '@/pages/EntryListPage';
 import { EntryCreatePage } from '@/pages/EntryCreatePage';
 import { EntryDetailPage } from '@/pages/EntryDetailPage';
 import { EntryEditPage } from '@/pages/EntryEditPage';
+import { CalendarPage } from '@/pages/CalendarPage';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -39,12 +40,20 @@ function App() {
         <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-slate-100">
           <header className="bg-white shadow dark:bg-slate-950">
             <div className="max-w-3xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-              <Link
-                to="/"
-                className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors dark:text-slate-100 dark:hover:text-blue-400"
-              >
-                Simple Diary
-              </Link>
+              <div className="flex items-center gap-6">
+                <Link
+                  to="/"
+                  className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors dark:text-slate-100 dark:hover:text-blue-400"
+                >
+                  Simple Diary
+                </Link>
+                <Link
+                  to="/calendar"
+                  className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors dark:text-slate-300 dark:hover:text-blue-400"
+                >
+                  Calendar
+                </Link>
+              </div>
               <button
                 type="button"
                 onClick={toggleTheme}
@@ -81,6 +90,7 @@ function App() {
                 <Route path="/entries/new" element={<EntryCreatePage />} />
                 <Route path="/entries/:id" element={<EntryDetailPage />} />
                 <Route path="/entries/:id/edit" element={<EntryEditPage />} />
+                <Route path="/calendar" element={<CalendarPage />} />
               </Routes>
             </div>
           </main>

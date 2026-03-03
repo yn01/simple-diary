@@ -218,6 +218,26 @@ export class EntryRepository {
    * @returns Array of matching entries sorted by date descending
    * @throws ZodError if keyword is null or undefined
    */
+  /**
+   * Finds entries by year and month
+   * @param year The year (4-digit integer)
+   * @param month The month (1-12)
+   * @returns Array of matching entries sorted by date descending
+   */
+  findByMonth(year: number, month: number): Entry[] {
+    const yearStr = String(year);
+    const monthStr = String(month).padStart(2, '0');
+
+    const stmt = this.db.prepare(`
+      SELECT id, date, content, created_at, updated_at
+      FROM entries
+      WHERE strftime('%Y', date) = ? AND strftime('%m', date) = ?
+      ORDER BY date DESC, id DESC
+    `);
+
+    return stmt.all(yearStr, monthStr) as Entry[];
+  }
+
   search(keyword: string): Entry[] {
     // Validate keyword
     searchKeywordSchema.parse(keyword);

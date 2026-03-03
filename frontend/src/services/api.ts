@@ -79,6 +79,14 @@ export const api = {
   },
 
   /**
+   * Fetch entries by month
+   */
+  async getEntriesByMonth(year: number, month: number, signal?: AbortSignal): Promise<Entry[]> {
+    const response = await fetch(`${API_BASE}/entries?year=${year}&month=${month}`, { signal });
+    return handleResponse<Entry[]>(response, 'Failed to fetch entries by month');
+  },
+
+  /**
    * Search entries by keyword
    */
   async searchEntries(query: string): Promise<Entry[]> {

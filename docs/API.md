@@ -22,6 +22,7 @@ Simple Diary APIは、日記エントリーのCRUD操作と検索機能を提供
 | GET | `/api/entries/:id` | エントリー詳細取得 |
 | PUT | `/api/entries/:id` | エントリー更新 |
 | DELETE | `/api/entries/:id` | エントリー削除 |
+| GET | `/api/entries?year=YYYY&month=MM` | カレンダー用エントリー取得 |
 | GET | `/api/entries/search` | エントリー検索 |
 
 ---
@@ -383,7 +384,70 @@ await fetch('http://localhost:3000/api/entries/1', {
 
 ---
 
-## 7. エントリー検索
+## 7. カレンダー用エントリー取得
+
+指定された年月の日記エントリーを取得します。カレンダービューで使用されます。
+
+### エンドポイント
+```
+GET /api/entries?year=YYYY&month=MM
+```
+
+### クエリパラメータ
+
+| パラメータ | 型 | 必須 | 説明 |
+|-----------|---|-----|------|
+| year | number | ✅ | 年（4桁の整数） |
+| month | number | ✅ | 月（1-12） |
+
+### レスポンス
+
+#### 成功 (200 OK)
+```json
+[
+  {
+    "id": 1,
+    "date": "2026-03-01",
+    "content": "3月最初の日記です。",
+    "created_at": "2026-03-01T10:00:00.000Z",
+    "updated_at": "2026-03-01T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "date": "2026-03-04",
+    "content": "カレンダービューを実装しました。",
+    "created_at": "2026-03-04T12:00:00.000Z",
+    "updated_at": "2026-03-04T12:00:00.000Z"
+  }
+]
+```
+
+#### エラー (400 Bad Request)
+```json
+{
+  "message": "Validation error",
+  "details": [
+    "year and month parameters are required"
+  ]
+}
+```
+
+### サンプルコード
+
+#### cURL
+```bash
+curl "http://localhost:3000/api/entries?year=2026&month=3"
+```
+
+#### JavaScript (fetch)
+```javascript
+const response = await fetch('http://localhost:3000/api/entries?year=2026&month=3');
+const entries = await response.json();
+```
+
+---
+
+## 8. エントリー検索
 
 キーワードで日記エントリーを検索します（LIKE検索）。
 
@@ -532,6 +596,7 @@ const results = await response.json();
 | バージョン | 日付 | 変更内容 |
 |-----------|------|----------|
 | 1.0.0 | 2026-02-01 | 初版リリース |
+| 1.1.0 | 2026-03-04 | カレンダービュー用エンドポイント追加 |
 
 ---
 

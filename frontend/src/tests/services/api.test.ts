@@ -180,7 +180,9 @@ describe('API Service', () => {
 
       const result = await api.getEntriesByMonth(2026, 1);
 
-      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=1', { signal: undefined });
+      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=1', {
+        signal: undefined,
+      });
       expect(result).toEqual(mockEntries);
     });
 
@@ -193,7 +195,9 @@ describe('API Service', () => {
 
       await api.getEntriesByMonth(2026, 3, controller.signal);
 
-      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=3', { signal: controller.signal });
+      expect(mockFetch).toHaveBeenCalledWith('/api/entries?year=2026&month=3', {
+        signal: controller.signal,
+      });
     });
 
     it('throws error when fetch fails', async () => {
@@ -203,7 +207,9 @@ describe('API Service', () => {
         statusText: 'Internal Server Error',
       });
 
-      await expect(api.getEntriesByMonth(2026, 1)).rejects.toThrow('Failed to fetch entries by month');
+      await expect(api.getEntriesByMonth(2026, 1)).rejects.toThrow(
+        'Failed to fetch entries by month'
+      );
     });
   });
 

@@ -99,8 +99,17 @@ export function CalendarPage() {
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-label="Previous month"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
           </svg>
         </button>
         <span className="text-lg font-semibold text-gray-900 dark:text-slate-100 min-w-[160px] text-center">
@@ -112,8 +121,17 @@ export function CalendarPage() {
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500"
           aria-label="Next month"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            />
           </svg>
         </button>
       </div>
@@ -122,9 +140,7 @@ export function CalendarPage() {
       {isLoading && (
         <div className="text-center py-4 text-gray-500 dark:text-slate-400">Loading...</div>
       )}
-      {error && (
-        <div className="text-center py-4 text-red-600 dark:text-red-400">{error}</div>
-      )}
+      {error && <div className="text-center py-4 text-red-600 dark:text-red-400">{error}</div>}
 
       {/* Calendar grid */}
       {!isLoading && !error && (
@@ -140,7 +156,10 @@ export function CalendarPage() {
             ))}
             {/* Empty cells before first day */}
             {Array.from({ length: firstDay }, (_, i) => (
-              <div key={`empty-${i}`} className="h-14 border-b border-r border-gray-100 dark:border-slate-700" />
+              <div
+                key={`empty-${i}`}
+                className="h-14 border-b border-r border-gray-100 dark:border-slate-700"
+              />
             ))}
             {/* Day cells */}
             {Array.from({ length: daysInMonth }, (_, i) => {
@@ -149,9 +168,7 @@ export function CalendarPage() {
               const hasEntries = entriesByDate.has(dateStr);
               const isSelected = selectedDate === dateStr;
               const isToday =
-                year === now.getFullYear() &&
-                month === now.getMonth() + 1 &&
-                day === now.getDate();
+                year === now.getFullYear() && month === now.getMonth() + 1 && day === now.getDate();
 
               const ariaLabel = `${month}月${day}日${hasEntries ? ' エントリあり' : ''}`;
 

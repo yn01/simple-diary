@@ -346,21 +346,15 @@ describe('EntryService', () => {
     });
 
     it('throws error for non-integer year', () => {
-      expect(() => service.getEntriesByMonth(20.5, 3)).toThrow(
-        'year must be a 4-digit integer'
-      );
+      expect(() => service.getEntriesByMonth(20.5, 3)).toThrow('year must be a 4-digit integer');
     });
 
     it('throws error for year < 1000', () => {
-      expect(() => service.getEntriesByMonth(999, 3)).toThrow(
-        'year must be a 4-digit integer'
-      );
+      expect(() => service.getEntriesByMonth(999, 3)).toThrow('year must be a 4-digit integer');
     });
 
     it('throws error for year > 9999', () => {
-      expect(() => service.getEntriesByMonth(10000, 3)).toThrow(
-        'year must be a 4-digit integer'
-      );
+      expect(() => service.getEntriesByMonth(10000, 3)).toThrow('year must be a 4-digit integer');
     });
   });
 });

@@ -377,9 +377,7 @@ describe('Entry API Integration Tests', () => {
     });
 
     it('returns entries for the specified month', async () => {
-      const response = await request(app)
-        .get('/api/entries?year=2024&month=3')
-        .expect(200);
+      const response = await request(app).get('/api/entries?year=2024&month=3').expect(200);
 
       expect(response.body).toHaveLength(2);
       response.body.forEach((e: { date: string }) => {
@@ -388,41 +386,29 @@ describe('Entry API Integration Tests', () => {
     });
 
     it('returns all entries when no year/month specified', async () => {
-      const response = await request(app)
-        .get('/api/entries')
-        .expect(200);
+      const response = await request(app).get('/api/entries').expect(200);
 
       expect(response.body).toHaveLength(4);
     });
 
     it('returns 400 when only year is specified', async () => {
-      await request(app)
-        .get('/api/entries?year=2024')
-        .expect(400);
+      await request(app).get('/api/entries?year=2024').expect(400);
     });
 
     it('returns 400 when only month is specified', async () => {
-      await request(app)
-        .get('/api/entries?month=3')
-        .expect(400);
+      await request(app).get('/api/entries?month=3').expect(400);
     });
 
     it('returns 400 for invalid year', async () => {
-      await request(app)
-        .get('/api/entries?year=abc&month=3')
-        .expect(400);
+      await request(app).get('/api/entries?year=abc&month=3').expect(400);
     });
 
     it('returns 400 for month out of range', async () => {
-      await request(app)
-        .get('/api/entries?year=2024&month=13')
-        .expect(400);
+      await request(app).get('/api/entries?year=2024&month=13').expect(400);
     });
 
     it('returns empty array when no entries match', async () => {
-      const response = await request(app)
-        .get('/api/entries?year=2024&month=12')
-        .expect(200);
+      const response = await request(app).get('/api/entries?year=2024&month=12').expect(200);
 
       expect(response.body).toHaveLength(0);
     });
